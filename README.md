@@ -1,6 +1,6 @@
 # 하루의 실험실 : 필터를 미끄러뜨리는 망 (CNN)
 
-**AHNBOAT LAB · 조수 하루의 3차원 실험실 · EP.02** — 랩타운 2층 실험 방의 실험대 (16, 0, 4): https://adminmrobo.github.io/ahn_boat_lab_town/haru3d.html
+**AHNBOAT LAB · 조수 하루의 3차원 실험실 · EP.03** — 랩타운 2층 실험 방의 실험대 (4, 0, 16): https://adminmrobo.github.io/ahn_boat_lab_town/haru3d.html
 
 실험조수 하루가 CNN 실험을 직접 다시 돌리고, 숫자와 그림으로 설명합니다.
 

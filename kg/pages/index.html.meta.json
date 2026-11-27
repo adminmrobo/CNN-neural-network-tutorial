@@ -1,0 +1,41 @@
+{
+ "title": "하루의 실험실 : 필터를 미끄러뜨리는 망 (CNN)",
+ "number": "EP.03",
+ "series": "하루의 실험실 (조수 하루의 3차원 실험실)",
+ "about": [
+  "lab:method/cnn",
+  "lab:concept/weight-sharing",
+  "lab:concept/translation-invariance"
+ ],
+ "basedOn": [
+  "lecun1989backpropagation",
+  "fukushima1980neocognitron"
+ ],
+ "educationalLevel": "입문",
+ "creator": [
+  {
+   "name": "Reon Ahn",
+   "role": "author"
+  }
+ ],
+ "contributor": [
+  {
+   "name": "AI 보조 제작",
+   "role": "assistant"
+  }
+ ],
+ "date": "2026-11-28",
+ "version": "1.1",
+ "language": [
+  "ko"
+ ],
+ "license": "CC BY-NC 4.0",
+ "url": "https://adminmrobo.github.io/CNN-neural-network-tutorial/",
+ "registry": "KG_00_registry 0.3",
+ "learningResourceType": "interactive explainer",
+ "seeAlso": "https://adminmrobo.github.io/ahnboat_lab_cover_status/ontology.html",
+ "domain": [
+  "dl"
+ ],
+ "suggestedCitation": "Reon Ahn (2026). 하루의 실험실 : 필터를 미끄러뜨리는 망 (CNN). 하루의 실험실 (조수 하루의 3차원 실험실) EP.03, v1.1."
+}

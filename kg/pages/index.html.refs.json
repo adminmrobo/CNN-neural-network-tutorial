@@ -1,0 +1,103 @@
+[
+ {
+  "id": "fukushima1980neocognitron",
+  "type": "article-journal",
+  "title": "Neocognitron: A self-organizing neural network model for a mechanism of pattern recognition unaffected by shift in position",
+  "author": [
+   {
+    "family": "Fukushima",
+    "given": "K."
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     1980
+    ]
+   ]
+  },
+  "container-title": "Biological Cybernetics",
+  "volume": "36",
+  "lab": {
+   "work": "lab:work/fukushima1980neocognitron",
+   "role": "background",
+   "supports": [],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true,
+    "container": true,
+    "pages": false,
+    "doi": false
+   },
+   "checkedBy": "페이지 출처 칸과 README에서 옮김 (외부 대조 안 함)",
+   "checkedSource": "page"
+  }
+ },
+ {
+  "id": "lecun1989backpropagation",
+  "type": "article-journal",
+  "title": "Backpropagation Applied to Handwritten Zip Code Recognition",
+  "author": [
+   {
+    "family": "LeCun",
+    "given": "Y."
+   },
+   {
+    "family": "Boser",
+    "given": "B."
+   },
+   {
+    "family": "Denker",
+    "given": "J. S."
+   },
+   {
+    "family": "Henderson",
+    "given": "D."
+   },
+   {
+    "family": "Howard",
+    "given": "R. E."
+   },
+   {
+    "family": "Hubbard",
+    "given": "W."
+   },
+   {
+    "family": "Jackel",
+    "given": "L. D."
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     1989
+    ]
+   ]
+  },
+  "container-title": "Neural Computation",
+  "volume": "1",
+  "issue": "4",
+  "page": "541–551",
+  "DOI": "10.1162/neco.1989.1.4.541",
+  "lab": {
+   "work": "lab:work/lecun1989backpropagation",
+   "role": "primary",
+   "supports": [
+    "lab:claim/lecun1989-zip"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true,
+    "container": true,
+    "pages": true,
+    "doi": true
+   },
+   "checkedBy": "페이지 출처 칸과 README에서 옮김 (외부 대조 안 함)",
+   "checkedSource": "page"
+  }
+ }
+]

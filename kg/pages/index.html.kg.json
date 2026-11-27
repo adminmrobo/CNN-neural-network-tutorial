@@ -1,0 +1,591 @@
+{
+ "version": "1.0",
+ "page": "CNN-neural-network-tutorial",
+ "nodes": [
+  {
+   "id": "lab:method/cnn",
+   "type": "Method",
+   "label": {
+    "ko": "합성곱 신경망 (CNN)",
+    "en": "Convolutional neural network"
+   },
+   "anchor": "#stage",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "domain": [
+    "dl"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "3×3 필터를 그림 위로 미끄러뜨려 특징 지도를 만들고, 최댓값으로 줄인 뒤 분류하는 망. 이 실험은 필터 4개 → 2×2 최댓값 줄이기 → 필터 8개 → 지도마다 최댓값 → 3."
+   },
+   "family": "vision"
+  },
+  {
+   "id": "lab:concept/convolution-filter",
+   "type": "Concept",
+   "label": {
+    "ko": "필터 미끄러뜨리기 (합성곱)",
+    "en": "Sliding a filter (convolution)"
+   },
+   "anchor": "#stage",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "domain": [
+    "dl"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "같은 3×3 숫자 묶음을 그림의 모든 위치에 곱해 더하는 일."
+   },
+   "family": "vision"
+  },
+  {
+   "id": "lab:concept/weight-sharing",
+   "type": "Concept",
+   "label": {
+    "ko": "가중치 공유",
+    "en": "Weight sharing"
+   },
+   "anchor": "#stage",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "domain": [
+    "dl"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "같은 필터 숫자를 그림 전체에 나눠 써서 가중치가 363개뿐(일반 망 8,323개, 23배 적음)."
+   },
+   "family": "vision"
+  },
+  {
+   "id": "lab:concept/feature-map",
+   "type": "Concept",
+   "label": {
+    "ko": "특징 지도",
+    "en": "Feature map"
+   },
+   "anchor": "#stage",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "domain": [
+    "dl"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "필터 하나가 그림 전체를 훑은 결과. 필터 4개면 지도 4장."
+   },
+   "family": "vision"
+  },
+  {
+   "id": "lab:concept/max-pooling",
+   "type": "Concept",
+   "label": {
+    "ko": "최댓값 줄이기 (최대 풀링)",
+    "en": "Max pooling"
+   },
+   "anchor": "#stage",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "domain": [
+    "dl"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "2×2 칸에서 가장 큰 값만 남기고, 마지막에는 지도마다 가장 큰 값 하나만 남긴다."
+   },
+   "family": "vision"
+  },
+  {
+   "id": "lab:concept/translation-invariance",
+   "type": "Concept",
+   "label": {
+    "ko": "옮겨도 알아보기 (이동 불변성)",
+    "en": "Shift invariance"
+   },
+   "anchor": "#stage",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "domain": [
+    "dl"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "얼굴을 오른쪽으로 옮겨도 같은 답을 내는 성질. 옮긴 그림 정답률 CNN 98.0%."
+   },
+   "family": "vision"
+  },
+  {
+   "id": "lab:method/plain-mlp-256-32-3",
+   "type": "Method",
+   "label": {
+    "ko": "일반 망 256-32-3",
+    "en": "Plain network 256-32-3"
+   },
+   "anchor": "#stage",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "domain": [
+    "dl"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "픽셀마다 따로 가중치를 붙이는 완전연결 망."
+   },
+   "family": "nn-basics"
+  },
+  {
+   "id": "lab:concept/position-overfit",
+   "type": "Limitation",
+   "label": {
+    "ko": "본 자리만 아는 망",
+    "en": "Position-bound plain network"
+   },
+   "anchor": "#stage",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "domain": [
+    "dl"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "학습 그림에서 한 번도 밝아진 적 없는 13~15번 열에 얼굴이 오면 일반 망의 답이 무너진다(옮긴 그림 25.8%)."
+   },
+   "family": "ml-basics"
+  },
+  {
+   "id": "lab:concept/compute-cost-cnn",
+   "type": "Limitation",
+   "label": {
+    "ko": "곱셈이 3.3배 많은 대가",
+    "en": "3.3× more multiplications"
+   },
+   "anchor": "#stage",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "domain": [
+    "dl"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "CNN은 필터를 모든 위치에 되풀이해 곱하므로 그림 한 장의 곱셈이 27,672번(일반 망 8,288번)."
+   },
+   "family": "vision"
+  },
+  {
+   "id": "lab:method/sgd-momentum",
+   "type": "Method",
+   "label": {
+    "ko": "모멘텀 경사하강법",
+    "en": "Gradient descent with momentum"
+   },
+   "anchor": "#stage",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "mentioned",
+   "domain": [
+    "dl"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "모멘텀 0.9, 학습률 0.05, 묶음 60장으로 40바퀴."
+   },
+   "family": "optimization"
+  },
+  {
+   "id": "lab:dataset/cat-dog-fox-16",
+   "type": "Dataset",
+   "label": {
+    "ko": "16×16 고양이·개·여우 얼굴",
+    "en": "16×16 cat/dog/fox faces"
+   },
+   "anchor": "#stage",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "domain": [
+    "dl"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "코드로 만든 회색 그림. 학습 1,800장은 왼쪽에만, 시험은 왼쪽 900장과 오른쪽으로 옮긴 900장."
+   }
+  },
+  {
+   "id": "lab:metric/shifted-accuracy",
+   "type": "Metric",
+   "label": {
+    "ko": "옮긴 그림 정답률",
+    "en": "Accuracy on shifted images"
+   },
+   "anchor": "#stage",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "domain": [
+    "dl"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "일반 망 25.8%, CNN 98.0%."
+   },
+   "family": "evaluation"
+  },
+  {
+   "id": "lab:sim/cnn-layers-3d",
+   "type": "Simulation",
+   "label": {
+    "ko": "층을 쌓으면 (3D)",
+    "en": "Stacked layers in 3D"
+   },
+   "anchor": "#stage",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "domain": [
+    "dl"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "그림, 지도 4장, 지도 8장을 3D 좌표에 쌓아 보여 주는 장면. 값은 학습된 가중치로 페이지 안에서 계산."
+   }
+  },
+  {
+   "id": "lab:sim/cnn-filter-growth",
+   "type": "Simulation",
+   "label": {
+    "ko": "학습 중: 필터가 자란다",
+    "en": "Filters growing during training"
+   },
+   "anchor": "#stage",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "domain": [
+    "dl"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "바퀴마다 1층 필터가 바뀌는 모습."
+   }
+  },
+  {
+   "id": "lab:work/fukushima1980neocognitron",
+   "type": "Work",
+   "label": {
+    "ko": "Neocognitron: A self-organizing neural network model for a mechanism of pattern recognition unaffected by shift in position",
+    "en": "Neocognitron: A self-organizing neural network model for a mechanism of pattern recognition unaffected by shift in position"
+   },
+   "anchor": "#export",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "mentioned",
+   "match": []
+  },
+  {
+   "id": "lab:work/lecun1989backpropagation",
+   "type": "Work",
+   "label": {
+    "ko": "Backpropagation Applied to Handwritten Zip Code Recognition",
+    "en": "Backpropagation Applied to Handwritten Zip Code Recognition"
+   },
+   "anchor": "#export",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "mentioned",
+   "match": []
+  },
+  {
+   "id": "lab:method/neocognitron",
+   "type": "Method",
+   "label": {
+    "ko": "네오코그니트론",
+    "en": "Neocognitron"
+   },
+   "anchor": "#stage",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "mentioned",
+   "domain": [
+    "dl"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "자리가 바뀌어도 패턴을 알아보는 망(Fukushima 1980)."
+   },
+   "family": "vision"
+  },
+  {
+   "id": "lab:claim/lecun1989-zip",
+   "type": "Claim",
+   "label": {
+    "ko": "LeCun 외(1989)는 역전파로 학습한 합성곱 망을 손글씨 우편번호 인식에 썼다",
+    "en": "LeCun et al. (1989) applied backprop CNN to zip codes"
+   },
+   "anchor": "#stage",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "domain": [
+    "dl"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "논문 제목이 말하는 내용."
+   },
+   "source": [
+    {
+     "ref": "lecun1989backpropagation",
+     "loc": ""
+    }
+   ]
+  }
+ ],
+ "edges": [
+  {
+   "s": "lab:method/cnn",
+   "p": "lab:broader",
+   "o": "lab:topic/convolution",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/convolution-filter",
+   "p": "lab:broader",
+   "o": "lab:topic/convolution",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/weight-sharing",
+   "p": "lab:broader",
+   "o": "lab:topic/convolution",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/feature-map",
+   "p": "lab:broader",
+   "o": "lab:topic/convolution",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/max-pooling",
+   "p": "lab:broader",
+   "o": "lab:topic/pooling",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/translation-invariance",
+   "p": "lab:broader",
+   "o": "lab:topic/pooling",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/plain-mlp-256-32-3",
+   "p": "lab:broader",
+   "o": "lab:topic/mlp",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/position-overfit",
+   "p": "lab:broader",
+   "o": "lab:topic/generalization",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/compute-cost-cnn",
+   "p": "lab:broader",
+   "o": "lab:topic/convolution",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/sgd-momentum",
+   "p": "lab:broader",
+   "o": "lab:topic/momentum-adam",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/neocognitron",
+   "p": "lab:broader",
+   "o": "lab:topic/convolution",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/convolution-filter",
+   "p": "lab:partOf",
+   "o": "lab:method/cnn",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/max-pooling",
+   "p": "lab:partOf",
+   "o": "lab:method/cnn",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/convolution-filter",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:concept/feature-map",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/feature-map",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:concept/max-pooling",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/weight-sharing",
+   "p": "lab:partOf",
+   "o": "lab:concept/convolution-filter",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/translation-invariance",
+   "p": "lab:partOf",
+   "o": "lab:method/cnn",
+   "anchor": "#stage",
+   "confidence": "medium"
+  },
+  {
+   "s": "lab:method/plain-mlp-256-32-3",
+   "p": "lab:hasLimitation",
+   "o": "lab:concept/position-overfit",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/position-overfit",
+   "p": "lab:addressedBy",
+   "o": "lab:method/cnn",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/cnn",
+   "p": "lab:hasLimitation",
+   "o": "lab:concept/compute-cost-cnn",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/cnn",
+   "p": "lab:contrastsWith",
+   "o": "lab:method/plain-mlp-256-32-3",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/cnn",
+   "p": "lab:evaluatedBy",
+   "o": "lab:metric/shifted-accuracy",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/cnn",
+   "p": "lab:evaluatedOn",
+   "o": "lab:dataset/cat-dog-fox-16",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/plain-mlp-256-32-3",
+   "p": "lab:evaluatedBy",
+   "o": "lab:metric/shifted-accuracy",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/cnn",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/cnn-layers-3d",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/convolution-filter",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/cnn-filter-growth",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/sgd-momentum",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/cnn-filter-growth",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/neocognitron",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:method/cnn",
+   "anchor": "#stage",
+   "confidence": "medium"
+  },
+  {
+   "s": "lab:method/neocognitron",
+   "p": "lab:relatedTo",
+   "o": "lab:work/fukushima1980neocognitron",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/lecun1989-zip",
+   "p": "lab:supports",
+   "o": "lab:method/cnn",
+   "anchor": "#stage",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/lecun1989-zip",
+   "p": "lab:assertedIn",
+   "o": "lab:work/lecun1989backpropagation",
+   "anchor": "#stage",
+   "confidence": "high"
+  }
+ ]
+}
